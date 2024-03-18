@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartCoop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body class="bg-dark">
-    <div class="d-flex flex-wrap col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 justify-content-center align-items-center vh-100">
+    <div
+        class="d-flex flex-wrap col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 justify-content-center align-items-center vh-100">
+        <!-- Login Card -->
         <div id="divLogin" class="card col-12 text-black">
             <div class="card-header">
                 <h3 class="col-12 text-center">Login</h3>
@@ -21,32 +22,36 @@
                     <label for="txtLoginEmail" class="form-label mb-0">Email</label>
                     <input id="txtLoginEmail" type="email" class="form-control" placeholder="user@example.com" aria-label="Email" required>
                     <label for="txtLoginPassword" class="form-label mb-0">Password</label>
-                    <input id="txtLoginPassword" type="password" class="form-control" placeholder="password" aria-label="Password" required>
+                    <input id="txtLoginPassword" type="password" class="form-control" placeholder="Password" aria-label="Password" required>
+
                     <button id="btnLogin" type="button" class="btn btn-primary col-12 mt-2">Login</button>
                     <button id="btnRegisterLogin" type="button" class="btn btn-secondary col-12 mt-2">Register</button>
                 </form>
             </div>
         </div>
-        <div class="card col-12 text-black" id="divRegister" style="display:none;">
+        <!-- Registration Card -->
+        <div id="divRegister" class="card col-12 text-black" style="display:none;">
             <div class="card-header">
                 <h3 class="col-12 text-center">Registration</h3>
             </div>
             <div class="card-body">
                 <form>
                     <label for="txtRegistrationEmail" class="form-label mb-0">Email</label>
-                    <input id="txtRegistrationEmail" type="email" class="form-control" placeholder="user@example.com" aria-label="Email">
+                    <input id="txtRegistrationEmail" type="email" class="form-control" placeholder="user@example.com" aria-label="Email" required>
                     <label for="txtRegistrationPassword" class="form-label mb-0">Password</label>
-                    <input id="txtRegistratioPassword" type="password" class="form-control" placeholder="password" aria-label="password">
+                    <input id="txtRegistrationPassword" type="password" class="form-control" placeholder="Password" aria-label="password" required>
+
                     <label for="txtFirstName" class="form-label mb-0">First Name</label>
-                    <input id="txtFirstName" class="form-control" placeholder="first name" aria-label="First Name">
+                    <input id="txtFirstName" class="form-control" placeholder="First Name" aria-label="First Name" required>
                     <label for="txtLastName" class="form-label mb-0">Last Name</label>
-                    <input id="txtLastName" class="form-control" type="text" placeholder="last name" aria-label="Last Name">
+                    <input id="txtLastName" class="form-control" type="text" placeholder="Last Name" aria-label="Last Name" required>
+
                     <label for="txtAddress1" class="form-label mb-0">Address 1</label>
-                    <input id="txtAddress1" class="form-control" type="text" placeholder="address 1" aria-label="Address 1">
+                    <input id="txtAddress1" class="form-control" type="text" placeholder="Address 1" aria-label="Address 1" required>
                     <label for="txtAddress2" class="form-label mb-0">Address 2</label>
-                    <input id="txtAddress2" class="form-control" type="text" placeholder="address 2 (optional)" aria-label="Address 2 (Optional)">
+                    <input id="txtAddress2" class="form-control" type="text" placeholder="Address 2 (optional)" aria-label="Address 2 (Optional)">
                     <label for="txtCity" class="form-label mb-0">City</label>
-                    <input id="txtCity" class="form-control" type="text" placeholder="city" aria-label="City">
+                    <input id="txtCity" class="form-control" type="text" placeholder="City" aria-label="City" required>
                     <label for="txtCity" class="form-label mb-0">State</label>
                     <select name="state" id="state" class="form-select">
                         <option value="" selected="selected">Select a State</option>
@@ -103,17 +108,21 @@
                         <option value="WY">Wyoming</option>
                     </select>
                     <label for="txtZip" class="form-label mb-0">Zip</label>
-                    <input id="txtZip" class="form-control" type="number" placeholder="ZIP" aria-label="Zip Code">
+                    <input id="txtZip" class="form-control" type="number" placeholder="ZIP" aria-label="Zip Code" required>
+
                     <label for="txtPhone" class="form-label mb-0">Phone</label>
-                    <input id="txtPhone" class="form-control" type="text" placeholder="(000)-000-0000" aria-label="Phone Number">
+                    <input id="txtPhone" class="form-control" type="text" placeholder="(000)-000-0000" aria-label="Phone Number" required>
+
                     <label for="txtCoopID" class="form-label mb-0">Coop Registration ID</label>
-                    <input id="txtCoopID" class="form-control" type="text" placeholder="Coop ID" aria-label="Coop ID Number">
-                    <button id="btnRegister" class="btn btn-primary col-12 mt-2 pt-3" type="button">Register</button>
+                    <input id="txtCoopID" class="form-control" type="text" placeholder="Coop ID" aria-label="Coop ID Number" required>
+
+                    <button id="btnRegister" class="btn btn-primary col-12 mt-2" type="button">Register</button>
                     <button id="btnClear" class="btn btn-secondary col-12 mt-1" type="button">Clear</button>
                     <a id="btnLoginReturn" class="col-12 mt-2">Return to Login</a>
                 </form>
             </div>
         </div>
+        <!-- Dashboard Card -->
         <div id="divDashboard" class="card col-12 text-black" style="display:none;">
             <div class="card-header">
                 Dashboard
@@ -132,8 +141,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // Regex for input validation
-        let emailReg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
-        let phoneReg = /\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g;
+        const regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+        const regPhone = /(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/
+
+        $(document).ready(function () {
+            if (sessionStorage.getItem('SessionID')) {
+                sessionStorage.removeItem('SessionID');
+            }
+        })
 
         // Slide toggle (Register -> Login) 
         $('#btnLoginReturn').on('click', function (result) {
@@ -148,50 +163,8 @@
             })
         })
 
-        // Login functionality
-        $('#btnLogin').on('click', function () {
-            let strError = '';
-            let blnError = false;
-            let strEmail = $('#txtLoginEmail').val();
-            let strPassword = $('#txtLoginPassword').val();
-            if (!emailReg.test(strEmail)) { // input validation
-                blnError = true;
-                strError += 'Email is invalid!';
-            }
-            if (strPassword < 1) {
-                blnError = true;
-                strError += 'Invalid password!';
-            }
-            if (blnError == true) {
-                Swal.fire({
-                    title: "Oops!",
-                    html: strError,
-                    icon: "error"
-                });
-            }
-            else {
-                console.log('No Errors Found.')
-                $.post('https://simplecoop.swollenhippo.com/sessions.php', {Email:strEmail, Password:strPassword}, function(result){
-                    result = JSON.parse(result)
-                    console.log(result)
-                    if(result.Error){
-                    Swal.fire({
-                        icon:'error',
-                        title:'Oh no, something went wrong',
-                        text: result.Error
-                    })
-                } else {
-                    sessionStorage.setItem('SessionID',result.SessionID);
-                    $('#divLogin').slideToggle(function () {
-                    $('#divDashboard').slideToggle();
-                    })
-                }
-                })
-            }
-        })
-
         // Clear input values
-        $('#btnClear').on('click', function() {
+        $('#btnClear').on('click', function () {
             $('#txtFirstName').val('');
             $('#txtLastName').val('');
             $('#txtAddress1').val('');
@@ -202,6 +175,41 @@
             $('#txtPhone').val('');
             $('#txtRegistrationEmail').val('');
             $('#txtRegistrationPassword').val('');
+        })
+
+        // Login functionality
+        $('#btnLogin').on('click', function () {
+            let strError = '';
+            let blnError = false;
+
+            let strEmail = $('#txtLoginEmail').val();
+            let strPassword = $('#txtLoginPassword').val();
+
+            // Input Validation
+            if (!regEmail.test(strEmail) || strPassword.length < 1) { // input validation
+                Swal.fire({ title: "Uh Oh!", text: "Invalid Username or Password", icon: "error" });
+            }
+            else {
+                // Verifying user is in system
+                $.getJSON('https://simplecoop.swollenhippo.com/users.php', { Email: strEmail }, function (user) {
+                    if (user != null && user.Password === strPassword) {
+                        $.post('https://simplecoop.swollenhippo.com/sessions.php', { Email: strEmail, Password: strPassword }, function (result) {
+                            result = JSON.parse(result);
+                            if (!result.Error) {
+                                sessionStorage.setItem('SessionID', result.SessionID);
+                                $('#divLogin').slideToggle(function () {
+                                    $('#divDashboard').slideToggle();
+                                })
+                            } else {
+                                Swal.fire({ icon: 'error', title: 'Uh Oh!', text: result.Error });
+                            }
+                        })
+                    }
+                    else {
+                        Swal.fire({ icon: 'error', title: 'Uh Oh!', text: 'Invalid Login Credentials' })
+                    }
+                })
+            }
         })
 
         // Registration functionality
@@ -230,7 +238,7 @@
                 blnError = true;
                 strError += 'Last name cannot be blank.  ';
             }
-            if (!emailReg.test(strEmail)) {
+            if (!regEmail.test(strEmail)) {
                 blnError = true;
                 strError += 'Invalid Email Format.  ';
             }
@@ -238,7 +246,7 @@
                 blnError = true;
                 strError += 'Password cannot be blank.  ';
             }
-            if (strShippingAddress1 < 1) {
+            if (strAddress1 < 1) {
                 blnError = true;
                 strError += 'Shipping Address 1 cannot be blank.  ';
             }
@@ -254,39 +262,42 @@
                 blnError = true;
                 strError += 'Invalid ZIP Code.  ';
             }
-            if (!phoneReg.test(strPhone)) {
+            if (!regPhone.test(strPhone)) {
                 blnError = true;
                 strError += 'Invalid phone number format.  '
             }
             if (strCoopID < 1) {
-                 blnError = true;
+                blnError = true;
                 strError += 'Invalid Coop ID';
             }
 
             if (blnError == true) {
-                console.log(strErrorMsg)
-                Swal.fire({
-                    title: "Uh oh!",
-                    text: strErrorMsg,
-                    icon: "error"
-                });
+                console.log(strError);
+                Swal.fire({ title: 'Uh oh!', text: strError, icon: 'error' });
             }
             else {
-                console.log('No Errors Found.');
-                $('#divRegister').slideToggle(function () {
-                    $('#divDashboard').slideToggle();
-                })
-                $.post('https://simplecoop.swollenhippo.com/users.php', {Email:strEmail, Password:strPassword, FirstName:strFirstName, LastName:strLastName}, function(result) {
-                    console.log(result);
-                    if (!error) {
-                        $.post('https://simplecoop.swollenhippo.com/useraddress', {Email:strEmail, Street1:strAddress1, Street2:strAddress2, City:strCity, State:strState, ZIP:strZip}, function(result) {
-                            console.log(result);
+                $.post('https://simplecoop.swollenhippo.com/users.php', { Email: strEmail, Password: strPassword, FirstName: strFirstName, LastName: strLastName, CoopID: strCoopID }, function (user) {
+                    user = JSON.parse(user);
+                    if (!user.Error) {
+                        $.post('https://simplecoop.swollenhippo.com/sessions.php', { Email: strEmail, Password: strPassword }, function (sessions) {
+                            sessions = JSON.parse(sessions);
+                            if (!sessions.Error) {
+                                sessionStorage.setItem('SessionID', sessions.SessionID)
+                                $('#divRegister').slideToggle(function () {
+                                    $('#divDashboard').slideToggle();
+                                })
+                            }
+                            else {
+                                Swal.fire({ icon: 'error', title: 'Uh Oh!', text: sessions.Error });
+                            }
                         })
+                    }
+                    else {
+                        Swal.fire({ icon: 'error', title: 'Uh Oh!', text: user.Error });
                     }
                 })
             }
         })
-
     </script>
 </body>
 

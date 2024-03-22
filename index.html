@@ -129,6 +129,7 @@
             </div>
             <div class="card-body">
                 Body of Dashboard
+                <button id="btnLogout" class="btn btn-primary col-12 mt-2" type="button">Logout</button>
             </div>
         </div>
     </div>
@@ -149,6 +150,20 @@
                 sessionStorage.removeItem('SessionID');
             }
         })
+
+        $('#btnLogout').on('click', function () {
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/sessions.php',
+                type: 'DELETE',
+                data: { SessionID: sessionStorage.getItem('SessionID') },
+                success: function (result) {
+                    sessionStorage.removeItem('SessionID');
+                    $('#divDashboard').slideUp(function () {
+                        $('#divLogin').slideDown();
+                    });
+                }
+            });
+        });
 
         // Slide toggle (Register -> Login) 
         $('#btnLoginReturn').on('click', function (result) {

@@ -52,8 +52,8 @@
                     <input id="txtAddress2" class="form-control" type="text" placeholder="Address 2 (optional)" aria-label="Address 2 (Optional)">
                     <label for="txtCity" class="form-label mb-0">City</label>
                     <input id="txtCity" class="form-control" type="text" placeholder="City" aria-label="City" required>
-                    <label for="txtCity" class="form-label mb-0">State</label>
-                    <select name="state" id="state" class="form-select">
+                    <label for="txtState" class="form-label mb-0">State</label>
+                    <select id="txtState" class="form-select">
                         <option value="" selected="selected">Select a State</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -142,8 +142,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // Regex for input validation
-        const regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-        const regPhone = /(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/
+        const regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
+        const regPhone = /(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g;
 
         $(document).ready(function () {
             if (sessionStorage.getItem('SessionID')) {
@@ -151,6 +151,7 @@
             }
         })
 
+        // Logout functionality
         $('#btnLogout').on('click', function () {
             $.ajax({
                 url: 'https://simplecoop.swollenhippo.com/sessions.php',
@@ -194,8 +195,6 @@
 
         // Login functionality
         $('#btnLogin').on('click', function () {
-            let strError = '';
-            let blnError = false;
 
             let strEmail = $('#txtLoginEmail').val();
             let strPassword = $('#txtLoginPassword').val();
@@ -263,7 +262,7 @@
             }
             if (strAddress1 < 1) {
                 blnError = true;
-                strError += 'Shipping Address 1 cannot be blank.  ';
+                strError += 'Address 1 cannot be blank.  ';
             }
             if (strCity < 1) {
                 blnError = true;
@@ -286,7 +285,7 @@
                 strError += 'Invalid Coop ID';
             }
 
-            if (blnError == true) {
+            if (blnError) {
                 console.log(strError);
                 Swal.fire({ title: 'Uh oh!', text: strError, icon: 'error' });
             }
@@ -294,16 +293,24 @@
                 $.post('https://simplecoop.swollenhippo.com/users.php', { Email: strEmail, Password: strPassword, FirstName: strFirstName, LastName: strLastName, CoopID: strCoopID }, function (user) {
                     user = JSON.parse(user);
                     if (!user.Error) {
-                        $.post('https://simplecoop.swollenhippo.com/sessions.php', { Email: strEmail, Password: strPassword }, function (sessions) {
-                            sessions = JSON.parse(sessions);
-                            if (!sessions.Error) {
-                                sessionStorage.setItem('SessionID', sessions.SessionID)
-                                $('#divRegister').slideToggle(function () {
-                                    $('#divDashboard').slideToggle();
+                        $.post('https://simplecoop.swollenhippo.com/useraddress.php', {Email: strEmail, Street1: strAddress1, Street2: strAddress2, City: strCity, State: strState, ZIP:strZip}, function (address) {
+                            address = JSON.parse(address);
+                            if (!address.Error) {
+                                $.post('https://simplecoop.swollenhippo.com/sessions.php', { Email: strEmail, Password: strPassword }, function (sessions) {
+                                    sessions = JSON.parse(sessions);
+                                    if (!sessions.Error) {
+                                        sessionStorage.setItem('SessionID', sessions.SessionID);
+                                        $('#divRegister').slideToggle(function () {
+                                            $('#divDashboard').slideToggle();
+                                        })
+                                    }
+                                    else {
+                                        Swal.fire({ icon: 'error', title: 'Uh Oh!', text: sessions.Error });
+                                    }
                                 })
                             }
                             else {
-                                Swal.fire({ icon: 'error', title: 'Uh Oh!', text: sessions.Error });
+                                Swal.fire({ icon: 'error', title: 'Uh Oh!', text: address.Error });
                             }
                         })
                     }
@@ -312,7 +319,7 @@
                     }
                 })
             }
-        })
+        })   
     </script>
 </body>
 

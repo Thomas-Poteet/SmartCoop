@@ -134,11 +134,8 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // Regex for input validation
@@ -156,7 +153,7 @@
             $.ajax({
                 url: 'https://simplecoop.swollenhippo.com/sessions.php',
                 type: 'DELETE',
-                data: { SessionID: sessionStorage.getItem('SessionID') },
+                data: {SessionID:sessionStorage.getItem('SessionID')},
                 success: function (result) {
                     sessionStorage.removeItem('SessionID');
                     $('#divDashboard').slideUp(function () {
@@ -191,6 +188,7 @@
             $('#txtPhone').val('');
             $('#txtRegistrationEmail').val('');
             $('#txtRegistrationPassword').val('');
+            $('#txtCoopID').val('');
         })
 
         // Login functionality
@@ -201,13 +199,17 @@
 
             // Input Validation
             if (!regEmail.test(strEmail) || strPassword.length < 1) { // input validation
-                Swal.fire({ title: "Uh Oh!", text: "Invalid Username or Password", icon: "error" });
+                Swal.fire({icon:'error', title:'Uh Oh!', text: 'Invalid Username or Password'});
             }
             else {
                 // Verifying user is in system
-                $.getJSON('https://simplecoop.swollenhippo.com/users.php', { Email: strEmail }, function (user) {
+                $.getJSON('https://simplecoop.swollenhippo.com/users.php', {Email:strEmail}, function (user) {
+                    console.log(user);
+                    $.getJSON('https://simplecoop.swollenhippo.com/useraddress.php', {Email:strEmail}, function (result) {
+                        console.log(result);
+                    })
                     if (user != null && user.Password === strPassword) {
-                        $.post('https://simplecoop.swollenhippo.com/sessions.php', { Email: strEmail, Password: strPassword }, function (result) {
+                        $.post('https://simplecoop.swollenhippo.com/sessions.php', {Email:strEmail, Password:strPassword}, function (result) {
                             result = JSON.parse(result);
                             if (!result.Error) {
                                 sessionStorage.setItem('SessionID', result.SessionID);
@@ -215,12 +217,12 @@
                                     $('#divDashboard').slideToggle();
                                 })
                             } else {
-                                Swal.fire({ icon: 'error', title: 'Uh Oh!', text: result.Error });
+                                Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
                             }
                         })
                     }
                     else {
-                        Swal.fire({ icon: 'error', title: 'Uh Oh!', text: 'Invalid Login Credentials' })
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:user.Error})
                     }
                 })
             }
@@ -287,35 +289,42 @@
 
             if (blnError) {
                 console.log(strError);
-                Swal.fire({ title: 'Uh oh!', text: strError, icon: 'error' });
+                Swal.fire({icon:'error', title:'Uh oh!', text:strError});
             }
             else {
-                $.post('https://simplecoop.swollenhippo.com/users.php', { Email: strEmail, Password: strPassword, FirstName: strFirstName, LastName: strLastName, CoopID: strCoopID }, function (user) {
-                    user = JSON.parse(user);
-                    if (!user.Error) {
-                        $.post('https://simplecoop.swollenhippo.com/useraddress.php', {Email: strEmail, Street1: strAddress1, Street2: strAddress2, City: strCity, State: strState, ZIP:strZip}, function (address) {
-                            address = JSON.parse(address);
-                            if (!address.Error) {
-                                $.post('https://simplecoop.swollenhippo.com/sessions.php', { Email: strEmail, Password: strPassword }, function (sessions) {
-                                    sessions = JSON.parse(sessions);
-                                    if (!sessions.Error) {
-                                        sessionStorage.setItem('SessionID', sessions.SessionID);
-                                        $('#divRegister').slideToggle(function () {
-                                            $('#divDashboard').slideToggle();
+                $.getJSON('https://simplecoop.swollenhippo.com/users.php', {Email:strEmail}, function (user) {
+                    if (user != null) {
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:'User is already registered'});
+                    }
+                    else {
+                        $.post('https://simplecoop.swollenhippo.com/users.php', {Email:strEmail, Password:strPassword, FirstName:strFirstName, LastName:strLastName, CoopID:strCoopID}, function (user) {
+                            user = JSON.parse(user);
+                            if (!user.Error) {
+                                $.post('https://simplecoop.swollenhippo.com/useraddress.php', {Email:strEmail, Street1:strAddress1, Street2:strAddress2, City:strCity, State:strState, ZIP:strZip}, function (address) {
+                                    address = JSON.parse(address);
+                                    if (!address.Error) {
+                                        $.post('https://simplecoop.swollenhippo.com/sessions.php', {Email:strEmail, Password:strPassword}, function(sessions) {
+                                            sessions = JSON.parse(sessions);
+                                            if (!sessions.Error) {
+                                                sessionStorage.setItem('SessionID', sessions.SessionID);
+                                                $('#divRegister').slideToggle(function() {
+                                                    $('#divDashboard').slideToggle();
+                                                })
+                                            }
+                                            else {
+                                                Swal.fire({icon:'error', title:'Uh Oh!', text:sessions.Error});
+                                            }
                                         })
                                     }
                                     else {
-                                        Swal.fire({ icon: 'error', title: 'Uh Oh!', text: sessions.Error });
+                                        Swal.fire({icon:'error', title:'Uh Oh!', text:address.Error});
                                     }
                                 })
                             }
                             else {
-                                Swal.fire({ icon: 'error', title: 'Uh Oh!', text: address.Error });
+                                Swal.fire({icon:'error', title:'Uh Oh!', text:user.Error});
                             }
                         })
-                    }
-                    else {
-                        Swal.fire({ icon: 'error', title: 'Uh Oh!', text: user.Error });
                     }
                 })
             }

@@ -177,7 +177,7 @@
                     <h1>Settings</h1>
                 </div>
                 <div class="card-body">
-                    
+                    <button id="btnBackToDashboard" class="btn btn-danger" type="button">Back To Dashboard</button>
                 </div>
             </div>
         </div>
@@ -232,6 +232,13 @@
         $('#btnSettings').on('click', function(){
             $('#divDashboard').slideToggle(function(){
                 $('#divSettings').slideToggle();
+            })
+        })
+
+        // Slide toggle (Settings -> Dashboard)
+        $('#btnBackToDashboard').on('click', function(){
+            $('#divSettings').slideToggle(function(){
+                $('#divDashboard').slideToggle();
             })
         })
 

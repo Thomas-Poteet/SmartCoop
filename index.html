@@ -448,7 +448,9 @@
             }
             console.log(postObj);
             $.post('https://simplecoop.swollenhippo.com/eggs.php', postObj, (result) =>{
-                location.reload();
+                $('#divAddEggs').slideToggle(function(){
+                    location.reload();
+                })
             })
         })
 

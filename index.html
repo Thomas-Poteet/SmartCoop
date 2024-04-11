@@ -150,6 +150,7 @@
                                 <div class="card-body">
                                     <!-- Content for eggs card -->
                                     <form>
+                                        <input id="txtTotalEggs" value="0" class="form-control" style="text-align: center;" readonly>
                                         <button id="btnGoToAdd" class="btn btn-primary" type="button">Add Eggs</button>
                                     </form>
                                 </div>
@@ -184,7 +185,7 @@
             </div>
         </div>
 
-        <!-- Egg Card-->
+        <!-- Add Eggs Card-->
         <div class="container" id="divAddEggs" style="display: none;">
             <div class="card">
                 <div class="d-flex justify-content-center card-header">
@@ -212,17 +213,55 @@
         const regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
         const regPhone = /(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/;
 
-        function getTotalEggs(){
-            $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID: sessionStorage.getItem('SessionID'), days: 1}, function(results){
+        //Function to get days 
+        function getDaysSinceEstablished(callback) {
+            $.getJSON('https://simplecoop.swollenhippo.com/sessions.php', { SessionID: sessionStorage.getItem('SessionID') }, function (result) {
+                console.log(result);
+                let userEmail = result.Email;
+                $.getJSON('https://simplecoop.swollenhippo.com/users.php', { Email: userEmail }, function (res) {
+                    console.log(res);
+                    let establishedDate = res.EstablishedDate;
+                    establishedDate = new Date(establishedDate);
+                    let year = establishedDate.getFullYear();
+                    let month = `0${establishedDate.getMonth() + 1}`.slice(-2);
+                    let day = `0${establishedDate.getDate()}`.slice(-2);
+
+                    const formattedEstablishedDate = `${year}-${month}-${day}`;
+
+                    let date = new Date();
+                    year = date.getFullYear();
+                    month = `0${date.getMonth() + 1}`.slice(-2);
+                    day = `0${date.getDate()}`.slice(-2);
+
+                    const formattedDate = `${year}-${month}-${day}`;
+
+                    let diff = Math.floor((Date.parse(formattedDate) - Date.parse(formattedEstablishedDate)) / 86400000);
+                    callback(diff);
+                });
+            });
+        }
+
+        //Function to get total eggs to then use for total eggs counter
+        function getTotalEggs(totalDays, callback){
+            $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID: sessionStorage.getItem('SessionID'), days: totalDays}, function(results){
+                console.log(results)
+                let totalEggs = 0
                 results.forEach(function(row){
-                    
+                    totalEggs = totalEggs + row.Harvested
                 })
+                callback(totalEggs)
             })
         }
 
         $(document).ready(function () {
             if (sessionStorage.getItem('SessionID')) {
                 $('#divDashboard').slideToggle();
+                getDaysSinceEstablished(function (totalDays) {
+                    console.log(totalDays);
+                    getTotalEggs(totalDays, function (totalEggs) {
+                        $('#txtTotalEggs').val(totalEggs);
+                    })
+                });
             } else {
                 $('#divLogin').slideToggle();
             }
@@ -448,9 +487,15 @@
             }
             console.log(postObj);
             $.post('https://simplecoop.swollenhippo.com/eggs.php', postObj, (result) =>{
-                $('#divAddEggs').slideToggle(function(){
-                    location.reload();
-                })
+                getDaysSinceEstablished(function (totalDays) {
+                    console.log(totalDays);
+                    getTotalEggs(totalDays, function (totalEggs) {
+                        $('#txtTotalEggs').val(totalEggs);
+                        $('#divAddEggs').slideToggle(function(){
+                            $('#divDashboard').slideToggle();
+                        });
+                    })
+                });
             })
         })
 

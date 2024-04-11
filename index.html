@@ -186,7 +186,10 @@
                     <h1>Settings</h1>
                 </div>
                 <div class="card-body">
-                    <button id="btnBackToDashboard" class="btn btn-danger" type="button">Back To Dashboard</button>
+                    <div class="d-flex col-12 justify-content-center">
+                        <button id="btnBackToDashboard" class="btn btn-danger col-4" type="button">Back To Dashboard</button>
+                        <button id="btnLogout" class="btn btn-danger col-4 ms-4" type="button">Logout</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -243,7 +246,7 @@
                 data: {SessionID:sessionStorage.getItem('SessionID')},
                 success: function (result) {
                     sessionStorage.removeItem('SessionID');
-                    $('#divDashboard').slideUp(function () {
+                    $('#divSettings').slideUp(function () {
                         $('#divLogin').slideDown();
                     });
                 }

@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></head>
 
 <body class="bg-dark">
-    <div class="d-flex flex-wrap col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 justify-content-center align-items-center vh-100">
+    <div class="d-flex flex-wrap col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 justify-content-center align-items-center vh-100">
         <!-- Login Card -->
         <div id="divLogin" class="card col-12 text-black" style="display:none;">
             <div class="card-header">
@@ -149,6 +149,7 @@
                                 <div class="card-body">
                                     <!-- Content for eggs card -->
                                     <form>
+                                        <canvas id="eggChart"></canvas>
                                         <input id="txtTotalEggs" value="0" class="form-control" style="text-align: center;" readonly>
                                         <button id="btnGoToAdd" class="btn btn-primary" type="button">Add Eggs</button>
                                     </form>
@@ -212,13 +213,13 @@
         const regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
         const regPhone = /(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/;
 
+        let eggChart = null;
+
         //Function to get days 
         function getDaysSinceEstablished(callback) {
             $.getJSON('https://simplecoop.swollenhippo.com/sessions.php', { SessionID: sessionStorage.getItem('SessionID') }, function (result) {
-                console.log(result);
                 let userEmail = result.Email;
                 $.getJSON('https://simplecoop.swollenhippo.com/users.php', { Email: userEmail }, function (res) {
-                    console.log(res);
                     let establishedDate = res.EstablishedDate;
                     establishedDate = new Date(establishedDate);
                     let year = establishedDate.getFullYear();
@@ -243,7 +244,6 @@
         //Function to get total eggs to then use for total eggs counter
         function getTotalEggs(totalDays, callback){
             $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID: sessionStorage.getItem('SessionID'), days: totalDays}, function(results){
-                console.log(results)
                 let totalEggs = 0
                 results.forEach(function(row){
                     totalEggs = totalEggs + row.Harvested
@@ -254,17 +254,65 @@
 
         function displayTotalEggs(totalEggs, callback){
             getDaysSinceEstablished(function (totalDays) {
-                console.log(totalDays);
                 getTotalEggs(totalDays, function (totalEggs) {
                     $('#txtTotalEggs').val(totalEggs);
                 })
             });
         }
 
+        function displayEggChart(){
+            getDaysSinceEstablished(function(totalDays){
+                $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID: sessionStorage.getItem('SessionID'), days: totalDays}, function(results){
+                    let labels = [];
+                    let data = [];
+                    let numEggs = 0;
+                    results.forEach(function(row){
+                        labels.push(row.LogDateTime);
+                        numEggs = numEggs + row.Harvested;
+                        data.push(numEggs);
+                    })
+                    const ctx = document.getElementById('eggChart').getContext('2d');
+                    eggChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Eggs',
+                                data: data,
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                fill: true,
+                                borderWidth: 1,
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                },
+                                x: {
+                                    display: false
+                                }
+                            }
+                        }
+                    })
+                })
+            })
+        }
+
+        function addData(chart, label, newData) {
+            chart.data.labels.push(label);
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.push(newData);
+            });
+            chart.update();
+        }
+
         $(document).ready(function () {
             if (sessionStorage.getItem('SessionID')) {
                 $('#divDashboard').slideToggle();
                 displayTotalEggs();
+                displayEggChart();
             } else {
                 $('#divLogin').slideToggle();
             }
@@ -482,7 +530,8 @@
         })
         
         $('#btnAddEggs').on('click', function() {
-            let intEggs = $('#txtNumEggs').val();
+            let intEggs = parseInt($('#txtNumEggs').val());
+            let currentEggs = parseInt(document.getElementById('txtTotalEggs').value);
             let date = new Date().toISOString();
             const postObj = {
                 SessionID: sessionStorage.getItem('SessionID'),
@@ -492,8 +541,14 @@
             console.log(postObj);
             $.post('https://simplecoop.swollenhippo.com/eggs.php', postObj, (result) =>{
                 displayTotalEggs();
-                $('#divAddEggs').slideToggle(function(){
-                    $('#divDashboard').slideToggle();
+                intEggs = intEggs + currentEggs;
+                $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID: sessionStorage.getItem('SessionID'), days: 1}, (result) => {
+                    let last = result.pop();
+                    addData(eggChart, last.LogDateTime, intEggs);
+                    $('#divAddEggs').slideToggle(function(){
+                        $('#divDashboard').slideToggle();
+                        eggChart.update();
+                    })
                 })
             })
         })

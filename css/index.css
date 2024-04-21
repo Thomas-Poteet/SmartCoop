@@ -1,0 +1,31 @@
+.thermostat {
+	width: 50px;
+	height: 150px;
+	border: solid;
+	border-radius: 10px;
+}
+
+
+.increase-temp {
+	width: 46px;
+	height: px;
+	font-weight: bold;
+	font-size: larger;
+}
+
+.text-temp {
+	width: 45px;
+	height: 50px;
+	border: solid 0px;
+	background-color: white;
+	text-align: center;
+	font-size: larger;
+}
+
+.decrease-temp {
+	width: 46px;
+	height: 48px;
+	font-weight: bold;
+	font-size: larger;
+	rotate: 180deg;
+}

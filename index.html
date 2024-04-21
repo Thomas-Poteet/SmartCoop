@@ -151,7 +151,7 @@
                                     <form>
                                         <canvas id="eggChart"></canvas>
                                         <input id="txtTotalEggs" value="0" class="form-control" style="text-align: center;" readonly>
-                                        <button id="btnGoToAdd" class="btn btn-primary" type="button">Add Eggs</button>
+                                        <button id="btnAddEggs" class="btn btn-primary" type="button">Add Eggs</button>
                                     </form>
                                 </div>
                             </div>
@@ -184,24 +184,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Add Eggs Card-->
-        <div class="container" id="divAddEggs" style="display: none;">
-            <div class="card">
-                <div class="d-flex justify-content-center card-header">
-                    <h1>Add Eggs</h1>
-                </div>
-                <div class="card-body">
-                    <form>
-                        <label for="txtNumEggs" class="form-control">Number of Eggs to Add</label>
-                        <input id="txtNumEggs" class="form-label" type="number">
-                        <button id="btnAddEggs" class="btn btn-primary" type="button">Add Eggs</button>
-                        <button id="btnBackFromAdd" class="btn btn-danger" type="button">Back To Dashboard</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
@@ -357,13 +339,6 @@
         $('#btnBackToDashboard').on('click', function(){
             $('#divSettings').slideToggle(function(){
                 $('#divDashboard').slideToggle();
-            })
-        })
-
-        // Slide Toggle (Dashboard -> Add Eggs)
-        $('#btnGoToAdd').on('click', function(){
-            $('#divDashboard').slideToggle(function(){
-                $('#divAddEggs').slideToggle();
             })
         })
 
@@ -529,31 +504,28 @@
             }
         })
         
+        // Add eggs
         $('#btnAddEggs').on('click', function() {
-            let intEggs = parseInt($('#txtNumEggs').val());
-            let currentEggs = parseInt(document.getElementById('txtTotalEggs').value);
-            let date = new Date().toISOString();
-            const postObj = {
-                SessionID: sessionStorage.getItem('SessionID'),
-                observationDateTime: date, 
-                eggs: intEggs
-            }
-            console.log(postObj);
-            $.post('https://simplecoop.swollenhippo.com/eggs.php', postObj, (result) =>{
+            Swal.fire({title: 'Add Eggs', text: 'Input the number of eggs', input:'number'}).then((eggs) => {
+                let intEggs = parseInt(eggs.value);
+                let currentEggs = parseInt(document.getElementById('txtTotalEggs').value);
+                let date = new Date().toISOString();
+                const postObj = {
+                    SessionID: sessionStorage.getItem('SessionID'),
+                    observationDateTime: date, 
+                    eggs: intEggs
+                }
+                console.log(postObj);
+                $.post('https://simplecoop.swollenhippo.com/eggs.php', postObj, (result) =>{
                 displayTotalEggs();
                 intEggs = intEggs + currentEggs;
                 $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID: sessionStorage.getItem('SessionID'), days: 1}, (result) => {
                     let last = result.pop();
                     addData(eggChart, last.LogDateTime, intEggs);
-                    $('#divAddEggs').slideToggle(function(){
-                        $('#divDashboard').slideToggle();
-                        eggChart.update();
-                    })
                 })
             })
+            })
         })
-
-
 
     </script>
 </body>

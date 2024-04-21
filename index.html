@@ -387,6 +387,7 @@
                             if (!result.Error) {
                                 sessionStorage.setItem('SessionID', result.SessionID);
                                 displayTotalEggs();
+                                displayEggChart();
                                 $('#divLogin').slideToggle(function () {
                                     $('#divDashboard').slideToggle();
                                 })
@@ -481,6 +482,8 @@
                                             sessions = JSON.parse(sessions);
                                             if (!sessions.Error) {
                                                 sessionStorage.setItem('SessionID', sessions.SessionID);
+                                                displayTotalEggs();
+                                                displayEggChart();
                                                 $('#divRegister').slideToggle(function() {
                                                     $('#divDashboard').slideToggle();
                                                 })

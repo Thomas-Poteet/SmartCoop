@@ -227,86 +227,97 @@
                     <h1>Settings</h1>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex col-12 justify-content-evenly">
-                        <div id="cardIndoorTemp"style="width: 50%;">
-                            <div class="d-flex justify-content-center">
-                                <h5>Indoor Temperature</h5>
-                            </div>
-                            <div>
-                                <div id="divIndoorThermostat" class="col-1 thermostat" style="margin: auto;">
-                                    <button id="btnIncreaseInsideTemp" class="btn increase-temp" type="button">+</button>
-                                    <input id="txtInsideTemp" type="text" class="col-12 text-temp" readonly disabled="disabled" value="70 °F">
-                                    <button id="btnDecreaseInsideTemp" class="btn decrease-temp" type="button">-</button>
+                    <div class="row">
+                        <div class="col-md-6 justify-content-center d-flex">
+                            <div id="cardIndoorTemp">
+                                <div class="d-flex justify-content-center">
+                                    <h5>Indoor Temperature</h5>
                                 </div>
-                                <div class="col-6 mt-3" style="margin: auto;">
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-12 thermostat">
+                                        <button id="btnIncreaseInsideTemp" class="btn increase-temp" type="button">+</button>
+                                        <input id="txtInsideTemp" type="text" class="col-12 text-temp" readonly disabled="disabled" value="70 °F">
+                                        <button id="btnDecreaseInsideTemp" class="btn decrease-temp" type="button">-</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex mt-3 justify-content-center">
                                     <button id="btnIndoorTemp" class="btn btn-primary col-12" type="button">Set Indoor Temp</button>
                                 </div>
-                            </div> 
-                        </div>
-                        <div id="cardOutdoorTemp" style="width: 50%;">
-                            <div class="d-flex justify-content-center">
-                                <h5>Outdoor Temperature</h5>
                             </div>
-                            <div>
-                                <div id="divOutdoorThermostat" class="col-1 thermostat" style="margin: auto;">
-                                    <button id="btnIncreaseOutdoorTemp" class="btn increase-temp" type="button">+</button>
-                                    <input id="txtOutdoorTemp" type="text" class="col-12 text-temp" readonly disabled="disabled" value="70 °F">
-                                    <button id="btnDecreaseOutdoorTemp" class="btn decrease-temp" type="button">-</button>
+                        </div>
+                        <div class="col-md-6 justify-content-center d-flex">
+                            <div id="cardOutdoorTemp">
+                                <div class="d-flex justify-content-center">
+                                    <h5>Outdoor Temperature</h5>
                                 </div>
-                                <div class="col-6 mt-3" style="margin: auto;">
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-12 thermostat">
+                                        <button id="btnIncreaseOutdoorTemp" class="btn increase-temp" type="button">+</button>
+                                        <input id="txtOutdoorTemp" type="text" class="col-12 text-temp" readonly disabled="disabled" value="70 °F">
+                                        <button id="btnDecreaseOutdoorTemp" class="btn decrease-temp" type="button">-</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex mt-3 justify-content-center">
                                     <button id="btnOutdoorTemp" class="btn btn-primary col-12" type="button">Set Outdoor Temp</button>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex col-12 justify-content-evenly">
-                        <div id="cardFeedTime" class="mt-5" style="width: 50%;">
-                            <div class="d-flex justify-content-center">
-                                <label for="txtFeedTime" class="form-label"><h5>Set Feed Time</h5></label>
-                            </div>
-                            <div>
-                                <div class="col-6" style="margin: auto;">
+                    <div class="row">
+                        <div class="col-md-6 mt-5">
+                            <div id="cardFeedTime">
+                                <div class="d-flex justify-content-center">
+                                    <label for="txtFeedTime" class="form-label"><h5>Set Feed Time</h5></label>
+                                </div>
+                                <div class="col-12">
                                     <input class="form-control" type="time" id="txtFeedTime" placeholder="Feed Time" required style="border: solid 0px; text-align: center;">
                                 </div>
-                                <div class="col-6 mt-3" style="margin: auto;">
+                                <div class="d-flex mt-3 justify-content-center">
                                     <button id="btnFeedTime" class="btn btn-primary col-12" type="button">Set Feed Time</button>
                                 </div>
-                            </div> 
-                        </div>
-                        <div id="cardOpenDoor" class="mt-5" style="width: 50%;">
-                            <div class="d-flex justify-content-center">
-                                <label for="txtOpenDoorTime" class="form-label"><h5>Set Open Door Time</h5></label>
                             </div>
-                            <div>
-                                <div class="col-6" style="margin: auto;">
+                        </div>
+                        <div class="col-md-6 mt-5">
+                            <div id="cardOpenDoor">
+                                <div class="d-flex justify-content-center">
+                                    <label for="txtOpenDoorTime" class="form-label"><h5>Set Open Door Time</h5></label>
+                                </div>
+                                <div class="col-12">
                                     <input class="form-control" type="time" id="txtOpenDoorTime" aria-label="Set Open Door Time" required style="border: solid 0px; text-align: center;">
                                 </div>
-                                <div class="col-6 mt-3" style="margin: auto;">
+                                <div class="d-flex mt-3 justify-content-center">
                                     <button id="btnOpenTime" class="btn btn-primary col-12" type="button">Set Open Door Time</button>
                                 </div>
-                            </div> 
-                        </div>
-                        <div id="cardCloseDoor" class="mt-5" style="width: 50%;">
-                            <div class="d-flex justify-content-center">
-                                <label for="txtCloseDoorTime" class="form-label"><h5>Set Close Door Time</h5></label>
                             </div>
-                            <div>
-                                <div class="col-6" style="margin: auto;">
+                        </div>
+                        <div class="col-md-6 mt-5">
+                            <div id="cardCloseDoor">
+                                <div class="d-flex justify-content-center">
+                                    <label for="txtCloseDoorTime" class="form-label"><h5>Set Close Door Time</h5></label>
+                                </div>
+                                <div class="col-12">
                                     <input class="form-control" type="time" id="txtCloseDoorTime" aria-label="Set Open Door Time" required style="border: solid 0px; text-align: center;">
                                 </div>
-                                <div class="col-6 mt-3" style="margin: auto;">
+                                <div class="d-flex mt-3 justify-content-center">
                                     <button id="btnCloseTime" class="btn btn-primary col-12" type="button">Set Close Door Time</button>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center mt-3">
-                        <button id="btnBackToDashboard" class="btn btn-warning col-4 ms-4" type="button">Back To Dashboard</button>
-                        <button id="btnLogout" class="btn btn-danger col-4 ms-4" type="button">Logout</button>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <button id="btnBackToDashboard" class="btn btn-warning col-12" type="button">Back To Dashboard</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button id="btnLogout" class="btn btn-danger col-12 mt-3" type="button">Logout</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>

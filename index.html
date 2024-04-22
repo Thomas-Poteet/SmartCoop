@@ -146,8 +146,9 @@
             <div class="card">
                 <div class="col-12 card-header">
                     <div class="d-flex">
-                        <div class="col-8">
+                        <div class="col-8 d-flex">
                             <h1 class="text-dark">Smart Coop</h1>
+                            <p style="margin: auto; width: 50%;" id="txtWelcome">Welcome</p>
                         </div>
                         <div class="d-flex justify-content-end align-items-center col-4">
                             <button id="btnSettings" class="btn" type="button" aria-label="Settings">
@@ -332,6 +333,16 @@
 
         let eggChart = null;
 
+        function welcome() {
+            $.getJSON('https://simplecoop.swollenhippo.com/sessions.php', {SessionID: sessionStorage.getItem('SessionID')}, function(result){
+                let email = result.Email;
+                $.getJSON('https://simplecoop.swollenhippo.com/users.php', {Email: email}, function(res){
+                    let firstName = res.FirstName;
+                    $('#txtWelcome').text(`Welcome, ${firstName}`);
+                })
+            })
+        }
+        
         //Function to get days 
         function getDaysSinceEstablished(callback) {
             $.getJSON('https://simplecoop.swollenhippo.com/sessions.php', { SessionID: sessionStorage.getItem('SessionID') }, function (result) {
@@ -499,6 +510,7 @@
                 getOpenDoorTime();
                 getCloseDoorTime();
                 displayCurrentWeather();
+                welcome();
             } else {
                 $('#divLogin').slideToggle();
             }
@@ -733,6 +745,7 @@
                                 getOpenDoorTime();
                                 getCloseDoorTime();
                                 displayCurrentWeather();
+                                welcome();
                                 $('#divLogin').slideToggle(function () {
                                     $('#divDashboard').slideToggle();
                                     
@@ -833,6 +846,7 @@
                                                 displayEggChart();
                                                 populateEnvironment();
                                                 displayCurrentWeather();
+                                                welcome();
                                                 $('#divRegister').slideToggle(function() {
                                                     $('#divDashboard').slideToggle();
                                                 })

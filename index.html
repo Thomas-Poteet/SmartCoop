@@ -537,12 +537,6 @@
                     humidity: getRandomHumidity()
                 };
                 
-                $.post('https://simplecoop.swollenhippo.com/environment.php', requestData, function(result) {
-                    if(MostCurrentDate < requestData.observationDateTime)
-                    {
-                        MostCurrentDate = requestData.observationDateTime;
-                    }
-                });
             };
         }
 
@@ -573,7 +567,7 @@
                 }
                 else{
                     $('#currentWeather').append('<p>Temperature: ' + data[0].Temperature + '°F</p>')
-                    $('#currentWeather').append('<p>Humidity: ' + data[0].Humidity + '</p>')
+                    $('#currentWeather').append('<p>Humidity: ' + data[0].Humidity + '%</p>')
                 }
             })
         }
@@ -654,6 +648,7 @@
                     sessionStorage.removeItem('SessionID');
                     $('#divSettings').slideUp(function () {
                         $('#divLogin').slideDown();
+                        location.reload();
                     });
                 }
             });

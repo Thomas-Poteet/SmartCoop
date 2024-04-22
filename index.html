@@ -6,7 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartCoop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></head>
+    <link href="css/index.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("images/background.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
 
 <body class="bg-dark">
@@ -35,82 +44,92 @@
             </div>
             <div class="card-body">
                 <form>
-                    <label for="txtRegistrationEmail" class="form-label mb-0">Email</label>
-                    <input id="txtRegistrationEmail" type="email" class="form-control" placeholder="user@example.com" aria-label="Email" required>
-                    <label for="txtRegistrationPassword" class="form-label mb-0">Password</label>
-                    <input id="txtRegistrationPassword" type="password" class="form-control" placeholder="Password" aria-label="password" required>
+                    <div class="card-header">
+                        <h3> Personal Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <label for="txtRegistrationEmail" class="form-label mb-0">Email</label>
+                        <input id="txtRegistrationEmail" type="email" class="form-control" placeholder="user@example.com" aria-label="Email" required>
+                        <label for="txtRegistrationPassword" class="form-label mb-0">Password</label>
+                        <input id="txtRegistrationPassword" type="password" class="form-control" placeholder="Password" aria-label="password" required>
 
-                    <label for="txtFirstName" class="form-label mb-0">First Name</label>
-                    <input id="txtFirstName" class="form-control" placeholder="First Name" aria-label="First Name" required>
-                    <label for="txtLastName" class="form-label mb-0">Last Name</label>
-                    <input id="txtLastName" class="form-control" type="text" placeholder="Last Name" aria-label="Last Name" required>
+                        <label for="txtFirstName" class="form-label mb-0">First Name</label>
+                        <input id="txtFirstName" class="form-control" placeholder="First Name" aria-label="First Name" required>
+                        <label for="txtLastName" class="form-label mb-0">Last Name</label>
+                        <input id="txtLastName" class="form-control" type="text" placeholder="Last Name" aria-label="Last Name" required>
 
-                    <label for="txtAddress1" class="form-label mb-0">Address 1</label>
-                    <input id="txtAddress1" class="form-control" type="text" placeholder="Address 1" aria-label="Address 1" required>
-                    <label for="txtAddress2" class="form-label mb-0">Address 2</label>
-                    <input id="txtAddress2" class="form-control" type="text" placeholder="Address 2 (optional)" aria-label="Address 2 (Optional)">
-                    <label for="txtCity" class="form-label mb-0">City</label>
-                    <input id="txtCity" class="form-control" type="text" placeholder="City" aria-label="City" required>
-                    <label for="txtState" class="form-label mb-0">State</label>
-                    <select id="txtState" class="form-select">
-                        <option value="" selected="selected">Select a State</option>
-                        <option value="AL">Alabama</option>
-                        <option value="AK">Alaska</option>
-                        <option value="AZ">Arizona</option>
-                        <option value="AR">Arkansas</option>
-                        <option value="CA">California</option>
-                        <option value="CO">Colorado</option>
-                        <option value="CT">Connecticut</option>
-                        <option value="DE">Delaware</option>
-                        <option value="DC">District Of Columbia</option>
-                        <option value="FL">Florida</option>
-                        <option value="GA">Georgia</option>
-                        <option value="HI">Hawaii</option>
-                        <option value="ID">Idaho</option>
-                        <option value="IL">Illinois</option>
-                        <option value="IN">Indiana</option>
-                        <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
-                        <option value="LA">Louisiana</option>
-                        <option value="ME">Maine</option>
-                        <option value="MD">Maryland</option>
-                        <option value="MA">Massachusetts</option>
-                        <option value="MI">Michigan</option>
-                        <option value="MN">Minnesota</option>
-                        <option value="MS">Mississippi</option>
-                        <option value="MO">Missouri</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NV">Nevada</option>
-                        <option value="NH">New Hampshire</option>
-                        <option value="NJ">New Jersey</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="NY">New York</option>
-                        <option value="NC">North Carolina</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="OH">Ohio</option>
-                        <option value="OK">Oklahoma</option>
-                        <option value="OR">Oregon</option>
-                        <option value="PA">Pennsylvania</option>
-                        <option value="RI">Rhode Island</option>
-                        <option value="SC">South Carolina</option>
-                        <option value="SD">South Dakota</option>
-                        <option value="TN">Tennessee</option>
-                        <option value="TX">Texas</option>
-                        <option value="UT">Utah</option>
-                        <option value="VT">Vermont</option>
-                        <option value="VA">Virginia</option>
-                        <option value="WA">Washington</option>
-                        <option value="WV">West Virginia</option>
-                        <option value="WI">Wisconsin</option>
-                        <option value="WY">Wyoming</option>
-                    </select>
-                    <label for="txtZip" class="form-label mb-0">Zip</label>
-                    <input id="txtZip" class="form-control" type="number" placeholder="ZIP" aria-label="Zip Code" required>
+                        <label for="txtPhone" class="form-label mb-0">Phone</label>
+                        <input id="txtPhone" class="form-control" type="text" placeholder="(000)-000-0000" aria-label="Phone Number" required>
+                    </div>
 
-                    <label for="txtPhone" class="form-label mb-0">Phone</label>
-                    <input id="txtPhone" class="form-control" type="text" placeholder="(000)-000-0000" aria-label="Phone Number" required>
+                    <div class="card-header">
+                        <h3> Address Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <label for="txtAddress1" class="form-label mb-0">Address 1</label>
+                        <input id="txtAddress1" class="form-control" type="text" placeholder="Address 1" aria-label="Address 1" required>
+                        <label for="txtAddress2" class="form-label mb-0">Address 2</label>
+                        <input id="txtAddress2" class="form-control" type="text" placeholder="Address 2 (optional)" aria-label="Address 2 (Optional)">
+                        <label for="txtCity" class="form-label mb-0">City</label>
+                        <input id="txtCity" class="form-control" type="text" placeholder="City" aria-label="City" required>
+                        <label for="txtState" class="form-label mb-0">State</label>
+                        <select id="txtState" class="form-select">
+                            <option value="" selected="selected">Select a State</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                        <label for="txtZip" class="form-label mb-0">Zip</label>
+                        <input id="txtZip" class="form-control" type="number" placeholder="ZIP" aria-label="Zip Code" required>
+                    </div>
 
                     <label for="txtCoopID" class="form-label mb-0">Coop Registration ID</label>
                     <input id="txtCoopID" class="form-control" type="text" placeholder="Coop ID" aria-label="Coop ID Number" required>
@@ -127,11 +146,12 @@
             <div class="card">
                 <div class="col-12 card-header">
                     <div class="d-flex">
-                        <div class="col-8">
+                        <div class="col-8 d-flex">
                             <h1 class="text-dark">Smart Coop</h1>
+                            <p style="margin: auto; width: 50%;" id="txtWelcome">Welcome</p>
                         </div>
                         <div class="d-flex justify-content-end align-items-center col-4">
-                            <button id="btnSettings" class="btn" type="button">
+                            <button id="btnSettings" class="btn" type="button" aria-label="Settings">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
                                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
                                     <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
@@ -145,12 +165,12 @@
                         <div class="col-md-6 mb-4">
                             <div class="card">
                                 <div class="card-header">
-                                    Eggs
+                                  <h4 aria-label="Eggs">Eggs</h4>
                                 </div>
                                 <div class="card-body">
                                     <!-- Content for eggs card -->
                                     <form>
-                                        <canvas id="eggChart"></canvas>
+                                        <canvas id="eggChart"  aria-label="Eggs Line Chart" role="img"></canvas>
                                         <input id="txtTotalEggs" value="0" class="form-control" style="text-align: center;" readonly>
                                         <button id="btnAddEggs" class="btn btn-primary" type="button">Add Eggs</button>
                                     </form>
@@ -161,11 +181,38 @@
                         <div class="col-md-6 mb-4">
                             <div class="card">
                                 <div class="card-header">
-                                    Environment
+                                   <h4 aria-label="Environment"> Environment </h4>
                                 </div>
                                 <div class="card-body">
                                     <!-- Content for environment card -->
-                                    Weather
+                                    <!-- Tab links -->
+                                    <div class="tab">
+                                        <button class="tablinks" onclick="openChart(event, 'PastWeek', 'Chart1', 7)">Past Week</button>
+                                        <button class="tablinks" onclick="openChart(event, 'PastTwoWeeks', 'Chart2', 14)">Past 2 Weeks</button>
+                                        <button class="tablinks" onclick="openChart(event, 'PastMonth', 'Chart3', 31)">Past Month</button>
+                                    </div>
+                                    
+                                    <!-- Tab content -->
+                                    <div id="PastWeek" class="tabcontent" style="display:none">
+                                        <h3>Past Week Weather Observations</h3>
+                                        <canvas id="Chart1" aria-label="Past Week Environment Chart" role="img"></canvas>
+                                    </div>
+                                    
+                                    <div id="PastTwoWeeks" class="tabcontent" style="display:none">
+                                        <h3>Past Month Weather Observations</h3>
+                                        <canvas id="Chart2" aria-label="Past Month Environment Chart" role="img"></canvas>
+                                    </div>
+                                    
+                                    <div id="PastMonth" class="tabcontent" style="display:none">
+                                        <h3>Past 3 Months Weather Observations</h3>
+                                        <canvas id="Chart3" aria-label="Past Month Environment Chart" role="img"></canvas>
+                                    </div>
+
+                                    <div>
+                                        <div class="mt-2"><h3>Current Weather:</h3></div>
+                                        <div id="currentWeather">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -181,16 +228,104 @@
                     <h1>Settings</h1>
                 </div>
                 <div class="card-body">
-                    <button id="btnBackToDashboard" class="btn btn-danger" type="button">Back To Dashboard</button>
+                    <div class="row">
+                        <div class="col-md-6 justify-content-center d-flex">
+                            <div id="cardIndoorTemp">
+                                <div class="d-flex justify-content-center">
+                                    <h5>Indoor Temperature</h5>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-12 thermostat">
+                                        <button id="btnIncreaseInsideTemp" class="btn increase-temp" type="button">+</button>
+                                        <input id="txtInsideTemp" type="text" class="col-12 text-temp" readonly disabled="disabled" value="70 °F">
+                                        <button id="btnDecreaseInsideTemp" class="btn decrease-temp" type="button">-</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex mt-3 justify-content-center">
+                                    <button id="btnIndoorTemp" class="btn btn-primary col-12" type="button">Set Indoor Temp</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 justify-content-center d-flex">
+                            <div id="cardOutdoorTemp">
+                                <div class="d-flex justify-content-center">
+                                    <h5>Outdoor Temperature</h5>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-12 thermostat">
+                                        <button id="btnIncreaseOutdoorTemp" class="btn increase-temp" type="button">+</button>
+                                        <input id="txtOutdoorTemp" type="text" class="col-12 text-temp" readonly disabled="disabled" value="70 °F">
+                                        <button id="btnDecreaseOutdoorTemp" class="btn decrease-temp" type="button">-</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex mt-3 justify-content-center">
+                                    <button id="btnOutdoorTemp" class="btn btn-primary col-12" type="button">Set Outdoor Temp</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-5">
+                            <div id="cardFeedTime">
+                                <div class="d-flex justify-content-center">
+                                    <label for="txtFeedTime" class="form-label"><h5>Set Feed Time</h5></label>
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control" type="time" id="txtFeedTime" placeholder="Feed Time" required style="border: solid 0px; text-align: center;">
+                                </div>
+                                <div class="d-flex mt-3 justify-content-center">
+                                    <button id="btnFeedTime" class="btn btn-primary col-12" type="button">Set Feed Time</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-5">
+                            <div id="cardOpenDoor">
+                                <div class="d-flex justify-content-center">
+                                    <label for="txtOpenDoorTime" class="form-label"><h5>Set Open Door Time</h5></label>
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control" type="time" id="txtOpenDoorTime" aria-label="Set Open Door Time" required style="border: solid 0px; text-align: center;">
+                                </div>
+                                <div class="d-flex mt-3 justify-content-center">
+                                    <button id="btnOpenTime" class="btn btn-primary col-12" type="button">Set Open Door Time</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-5">
+                            <div id="cardCloseDoor">
+                                <div class="d-flex justify-content-center">
+                                    <label for="txtCloseDoorTime" class="form-label"><h5>Set Close Door Time</h5></label>
+                                </div>
+                                <div class="col-12">
+                                    <input class="form-control" type="time" id="txtCloseDoorTime" aria-label="Set Open Door Time" required style="border: solid 0px; text-align: center;">
+                                </div>
+                                <div class="d-flex mt-3 justify-content-center">
+                                    <button id="btnCloseTime" class="btn btn-primary col-12" type="button">Set Close Door Time</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div>
+                            <button id="btnBackToDashboard" class="btn btn-warning col-12" type="button">Back To Dashboard</button>
+                        </div>
+                        <div>
+                            <button id="btnLogout" class="btn btn-danger col-12 mt-3" type="button">Logout</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
     <script>
         //Regex for input validation
         const regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
@@ -198,6 +333,16 @@
 
         let eggChart = null;
 
+        function welcome() {
+            $.getJSON('https://simplecoop.swollenhippo.com/sessions.php', {SessionID: sessionStorage.getItem('SessionID')}, function(result){
+                let email = result.Email;
+                $.getJSON('https://simplecoop.swollenhippo.com/users.php', {Email: email}, function(res){
+                    let firstName = res.FirstName;
+                    $('#txtWelcome').text(`Welcome, ${firstName}`);
+                })
+            })
+        }
+        
         //Function to get days 
         function getDaysSinceEstablished(callback) {
             $.getJSON('https://simplecoop.swollenhippo.com/sessions.php', { SessionID: sessionStorage.getItem('SessionID') }, function (result) {
@@ -291,16 +436,220 @@
             });
             chart.update();
         }
+        
+        // Get and Display Indoor Temp
+        function getIndoorTemp(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'IndoorTemp'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtInsideTemp').val(result.Value);
+                let str = result.Value;
+                let temp = parseInt(str.substring(0, str.indexOf(' ')));
+                $('#btnIncreaseInsideTemp').attr('aria-label', 'Increase Indoor Temperature to ' + (temp + 1) + ' °F');
+                $('#btnDecreaseInsideTemp').attr('aria-label', 'Decrease Indoor Temperature to ' + (temp - 1) + ' °F');
+            })
+        }
+
+        // Get and Display Outdoor Temp
+        function getOutdoorTemp(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'OutdoorTemp'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtOutdoorTemp').val(result.Value);
+                let str = result.Value;
+                let temp = parseInt(str.substring(0, str.indexOf(' ')));
+                $('#btnIncreaseOutdoorTemp').attr('aria-label', 'Increase Outdoor Temperature to ' + (temp + 1) + ' °F');
+                $('#btnDecreaseOutdoorTemp').attr('aria-label', 'Decrease Outdoor Temperature to ' + (temp - 1) + ' °F');
+            })
+        }
+
+        // Get and Display Feed Time
+        function getFeedTime(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'FeedTime'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtFeedTime').val(result.Value);
+            })
+        }
+
+        // Get and Display Open Door Time
+        function getOpenDoorTime(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'OpenDoorTime'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtOpenDoorTime').val(result.Value);
+            })
+        }
+
+        // Get and Display Close Door Time
+        function getCloseDoorTime(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'CloseDoorTime'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtCloseDoorTime').val(result.Value);
+            })
+        }
 
         $(document).ready(function () {
             if (sessionStorage.getItem('SessionID')) {
                 $('#divDashboard').slideToggle();
                 displayTotalEggs();
                 displayEggChart();
+                getIndoorTemp();
+                getOutdoorTemp();
+                getFeedTime();
+                getOpenDoorTime();
+                getCloseDoorTime();
+                displayCurrentWeather();
+                welcome();
             } else {
                 $('#divLogin').slideToggle();
             }
+            //displayEnvironment();
         })
+
+        function getRandomHumidity() {
+            // Generate a random humidity between 30 and 98
+            return Math.random() * (98 - 30) + 30;
+        }
+
+        function getRandomObservationDatetime() {
+            // Get the current date
+            var currentDate = new Date();     // Generate a random number of days between 0 and 100
+            var randomDays = Math.floor(Math.random() * 101);     // Calculate the random date within the specified range
+            var randomDate = new Date(currentDate);
+            randomDate.setDate(currentDate.getDate() - randomDays);     // Format the date in ISO string format
+            var observationDatetime = randomDate.toISOString();     
+            return observationDatetime;
+        }
+
+        function getRandomTemperature() {
+            // Generate a random temperature between 42 and 90
+            return Math.random() * (90 - 42) + 42;
+        }
+
+        function populateEnvironment(){
+            let strSessionID = sessionStorage.getItem('SessionID')
+            for (var i = 0; i < 100; i++) {
+                let strObservationDateTime = getRandomObservationDatetime()
+                // The SessionID and additional data with random temperature, humidity, and observationdatetime
+                var requestData = {
+                    SessionID: strSessionID,
+                    temperature: getRandomTemperature(),
+                    observationDateTime: strObservationDateTime,
+                    humidity: getRandomHumidity()
+                };
+                
+            };
+        }
+
+        function displayCurrentWeather(){
+            let strSessionID = sessionStorage.getItem('SessionID')
+            $.get('https://simplecoop.swollenhippo.com/environment.php',{SessionID:strSessionID, days:1}, function(result)
+            {
+                let data = JSON.parse(result);
+                let date = new Date();
+                let day = date.getDate();
+                let month = date.getMonth() + 1;
+                let year = date.getFullYear();
+
+                // This arrangement can be altered based on how we want the date's format to appear.
+                let strCurrentDate = `${year}-${month}-${day}`;
+                console.log(strCurrentDate)
+                if(data.length < 1){
+                    var requestData = {
+                        SessionID: strSessionID,
+                        temperature: getRandomTemperature(),
+                        observationDateTime: strCurrentDate,
+                        humidity: getRandomHumidity()
+                    };
+                    $.post('https://simplecoop.swollenhippo.com/environment.php', requestData, function(result){
+                        console.log(result)
+                    })
+
+                }
+                else{
+                    $('#currentWeather').append('<p>Temperature: ' + data[0].Temperature + '°F</p>')
+                    $('#currentWeather').append('<p>Humidity: ' + data[0].Humidity + '%</p>')
+                }
+            })
+        }
+
+        function displayEnvironment(chartDays, chartName){
+            let strSessionID = sessionStorage.getItem('SessionID')
+            let strCurrentDate = new Date();
+            let strTemperatures = [];
+            let strHumidities = [];
+            let strObservationDates = [];
+            $.get('https://simplecoop.swollenhippo.com/environment.php',{SessionID:strSessionID, days:chartDays}, function(result){
+                let data = JSON.parse(result);
+                data.forEach(item =>{
+                    strObservationDates.push(item.ObservationDateTime);
+                    strTemperatures.push(item.Temperature);
+                    strHumidities.push(item.Humidity);
+                });
+                const ctx = document.getElementById(chartName).getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: strObservationDates,
+                        datasets: [{
+                            label: 'Temperature (°C)',
+                            data: strTemperatures,
+                            borderColor: 'rgb(255, 99, 132)',
+                            tension: 0.1
+                        }, {
+                            label: 'Humidity (%)',
+                            data: strHumidities,
+                            borderColor: 'rgb(54, 162, 235)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            
+        }
+
+        function openChart(evt, cityName, chartName, days) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+            console.log(chartName, days)
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active"
+            displayEnvironment(days, chartName);
+        }
+        
 
         // Logout functionality
         $('#btnLogout').on('click', function () {
@@ -310,8 +659,9 @@
                 data: { SessionID: sessionStorage.getItem('SessionID') },
                 success: function (result) {
                     sessionStorage.removeItem('SessionID');
-                    $('#divDashboard').slideUp(function () {
+                    $('#divSettings').slideUp(function () {
                         $('#divLogin').slideDown();
+                        location.reload();
                     });
                 }
             });
@@ -383,8 +733,17 @@
                                 sessionStorage.setItem('SessionID', result.SessionID);
                                 displayTotalEggs();
                                 displayEggChart();
+                                getIndoorTemp();
+                                getOutdoorTemp();
+                                getFeedTime();
+                                getOpenDoorTime();
+                                getCloseDoorTime();
+                                displayCurrentWeather();
+                                welcome();
                                 $('#divLogin').slideToggle(function () {
                                     $('#divDashboard').slideToggle();
+                                    
+                                    //displayEnvironment();
                                 })
                             } else {
                                 Swal.fire({ icon: 'error', title: 'Uh Oh!', text: result.Error });
@@ -479,7 +838,11 @@
                                                 sessionStorage.setItem('SessionID', sessions.SessionID);
                                                 displayTotalEggs();
                                                 displayEggChart();
-                                                $('#divRegister').slideToggle(function () {
+                                                populateEnvironment();
+                                                displayCurrentWeather();
+                                                welcome();
+                                                $('#divRegister').slideToggle(function() {
+
                                                     $('#divDashboard').slideToggle();
                                                 })
                                             }
@@ -503,8 +866,8 @@
         })
 
         // Add eggs
-        $('#btnAddEggs').on('click', function () {
-            Swal.fire({ title: 'Add Eggs', text: 'Input the number of eggs', input: 'number' }).then((eggs) => {
+        $('#btnAddEggs').on('click', function() {
+            Swal.fire({title: 'Add Eggs', text: 'Input the number of eggs', input:'number', showCancelButton: true, preConfirm: (egg) => {if (!egg || egg.trim() === "" || egg < 0) {Swal.showValidationMessage("Please enter a valid number of eggs");}}}).then((eggs) => {
                 let intEggs = parseInt(eggs.value);
                 if (!isNaN(intEggs)) {
                     let currentEggs = parseInt(document.getElementById('txtTotalEggs').value);
@@ -530,6 +893,148 @@
             })
         })
 
+        $('#btnIndoorTemp').on('click', function(){
+            let temp = $('#txtInsideTemp').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'IndoorTemp',
+                value: temp
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Indoor Temperature Set'});
+                    }
+                }
+            })
+        });
+
+        $('#btnIncreaseInsideTemp').on('click', function(){
+            let str = $('#txtInsideTemp').val();
+            let temp = parseInt(str.substring(0, str.indexOf(' '))) + 1;
+            $('#txtInsideTemp').val(temp + ' °F');
+            $('#btnIncreaseInsideTemp').attr('aria-label', 'Increase Indoor Temperature to ' + temp + 1 + ' degrees Fahrenheit');
+        });
+
+        $('#btnDecreaseInsideTemp').on('click', function(){
+            let str = $('#txtInsideTemp').val();
+            let temp = parseInt(str.substring(0, str.indexOf(' '))) - 1;
+            $('#txtInsideTemp').val(temp + ' °F');
+            $('#btnDecreaseInsideTemp').attr('aria-label', 'Decrease Indoor Temperature to ' + temp - 1 + ' degrees Fahrenheit');
+        });
+
+        $('#btnOutdoorTemp').on('click', function(){
+            let temp = $('#txtOutdoorTemp').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'OutdoorTemp',
+                value: temp
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Indoor Temperature Set'});
+                    }
+                }
+            })
+        });
+
+        $('#btnIncreaseOutdoorTemp').on('click', function(){
+            let str = $('#txtOutdoorTemp').val();
+            let temp = parseInt(str.substring(0, str.indexOf(' '))) + 1;
+            $('#txtOutdoorTemp').val(temp + ' °F');
+            $('#btnIncreaseOutdoorTemp').attr('aria-label', 'Increase Outdoor Temperature to ' + temp + 1 + ' degrees Fahrenheit');
+        });
+
+        $('#btnDecreaseOutdoorTemp').on('click', function(){
+            let str = $('#txtOutdoorTemp').val();
+            let temp = parseInt(str.substring(0, str.indexOf(' '))) - 1;
+            $('#txtOutdoorTemp').val(temp + ' °F');
+            $('#btnDecreaseOutdoorTemp').attr('aria-label', 'Decrease Outdoor Temperature to ' + temp - 1 + ' degrees Fahrenheit');
+        });
+
+        $('#btnFeedTime').on('click', function(){
+            let feedTime = $('#txtFeedTime').val();
+            console.log(feedTime);
+        });
+
+        $('#btnFeedTime').on('click', function(){
+            let feedTime = $('#txtFeedTime').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'FeedTime',
+                value: feedTime
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Feed Time Set'});
+                    }
+                }
+            })
+        });
+
+        $('#btnOpenTime').on('click', function(){
+            let openTime = $('#txtOpenDoorTime').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'OpenDoorTime',
+                value: openTime
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Open Door Time Set'});
+                    }
+                }
+            })
+        });
+
+        $('#btnCloseTime').on('click', function(){
+            let closeTime = $('#txtCloseDoorTime').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'CloseDoorTime',
+                value: closeTime
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Close Door Time Set'});
+                    }
+                }
+            })
+        });
     </script>
 </body>
 

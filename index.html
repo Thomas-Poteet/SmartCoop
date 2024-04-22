@@ -872,7 +872,7 @@
         
         // Add eggs
         $('#btnAddEggs').on('click', function() {
-            Swal.fire({title: 'Add Eggs', text: 'Input the number of eggs', input:'number',showCancelButton: true, preConfirm: (egg) => {if (!egg || egg.trim() === "" || egg < 0) {Swal.showValidationMessage("Please enter a valid number of eggs");}}}).then((eggs) => {
+            Swal.fire({title: 'Add Eggs', text: 'Input the number of eggs', input:'number', showCancelButton: true, preConfirm: (egg) => {if (!egg || egg.trim() === "" || egg < 0) {Swal.showValidationMessage("Please enter a valid number of eggs");}}}).then((eggs) => {
                 let intEggs = parseInt(eggs.value);
                 let currentEggs = parseInt(document.getElementById('txtTotalEggs').value);
                 let date = new Date().toISOString();

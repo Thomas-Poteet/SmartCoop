@@ -187,8 +187,8 @@
                                     <!-- Tab links -->
                                     <div class="tab">
                                         <button class="tablinks" onclick="openChart(event, 'PastWeek', 'Chart1', 7)">Past Week</button>
-                                        <button class="tablinks" onclick="openChart(event, 'PastMonth', 'Chart2', 30)">Past Month</button>
-                                        <button class="tablinks" onclick="openChart(event, 'PastThreeMonths', 'Chart3', 91)">Past 3 Months</button>
+                                        <button class="tablinks" onclick="openChart(event, 'PastTwoWeeks', 'Chart2', 14)">Past 2 Weeks</button>
+                                        <button class="tablinks" onclick="openChart(event, 'PastMonth', 'Chart3', 31)">Past Month</button>
                                     </div>
                                     
                                     <!-- Tab content -->
@@ -197,24 +197,21 @@
                                         <canvas id="Chart1" aria-label="Past Week Environment Chart" role="img"></canvas>
                                     </div>
                                     
-                                    <div id="PastMonth" class="tabcontent" style="display:none">
+                                    <div id="PastTwoWeeks" class="tabcontent" style="display:none">
                                         <h3>Past Month Weather Observations</h3>
                                         <canvas id="Chart2" aria-label="Past Month Environment Chart" role="img"></canvas>
                                     </div>
                                     
-                                    <div id="PastThreeMonths" class="tabcontent" style="display:none">
+                                    <div id="PastMonth" class="tabcontent" style="display:none">
                                         <h3>Past 3 Months Weather Observations</h3>
                                         <canvas id="Chart3" aria-label="Past Month Environment Chart" role="img"></canvas>
                                     </div>
-                                    <!--<canvas id="EnvironmentChart"></canvas> -->
+
                                     <div class="card">
                                         <div class="card-header">Current Weather</div>
                                         <div class="card-body" id="currentWeather">
-                                            Temperature:
-                                            Humidity: 
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -490,6 +487,7 @@
                 getFeedTime();
                 getOpenDoorTime();
                 getCloseDoorTime();
+                displayCurrentWeather();
             } else {
                 $('#divLogin').slideToggle();
             }
@@ -563,7 +561,8 @@
 
                 }
                 else{
-                    console.log(data)
+                    $('#currentWeather').append('<p>Temperature: ' + data[0].Temperature + '°F</p>')
+                    $('#currentWeather').append('<p>Humidity: ' + data[0].Humidity + '</p>')
                 }
             })
         }
@@ -727,6 +726,7 @@
                                 getFeedTime();
                                 getOpenDoorTime();
                                 getCloseDoorTime();
+                                displayCurrentWeather();
                                 $('#divLogin').slideToggle(function () {
                                     $('#divDashboard').slideToggle();
                                     
@@ -826,6 +826,7 @@
                                                 displayTotalEggs();
                                                 displayEggChart();
                                                 populateEnvironment();
+                                                displayCurrentWeather();
                                                 $('#divRegister').slideToggle(function() {
                                                     $('#divDashboard').slideToggle();
                                                 })

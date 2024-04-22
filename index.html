@@ -161,8 +161,37 @@
                                 </div>
                                 <div class="card-body">
                                     <!-- Content for environment card -->
-                                    <canvas id="EnvironmentChart"></canvas>
-                                    Weather
+                                    <!-- Tab links -->
+                                    <div class="tab">
+                                        <button class="tablinks" onclick="openChart(event, 'PastWeek', 'Chart1', 7)">Past Week</button>
+                                        <button class="tablinks" onclick="openChart(event, 'PastMonth', 'Chart2', 30)">Past Month</button>
+                                        <button class="tablinks" onclick="openChart(event, 'PastThreeMonths', 'Chart3', 91)">Past 3 Months</button>
+                                    </div>
+                                    
+                                    <!-- Tab content -->
+                                    <div id="PastWeek" class="tabcontent" style="display:none">
+                                        <h3>Past Week Weather Observations</h3>
+                                        <canvas id="Chart1"></canvas>
+                                    </div>
+                                    
+                                    <div id="PastMonth" class="tabcontent" style="display:none">
+                                        <h3>Past Month Weather Observations</h3>
+                                        <canvas id="Chart2"></canvas>
+                                    </div>
+                                    
+                                    <div id="PastThreeMonths" class="tabcontent" style="display:none">
+                                        <h3>Past 3 Months Weather Observations</h3>
+                                        <canvas id="Chart3"></canvas>
+                                    </div>
+                                    <!--<canvas id="EnvironmentChart"></canvas> -->
+                                    <div class="card">
+                                        <div class="card-header">Current Weather</div>
+                                        <div class="card-body" id="currentWeather">
+                                            Temperature:
+                                            Humidity: 
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -244,25 +273,51 @@
             };
         }
 
-        function displayEnvironment(){
+        function displayCurrentWeather(){
             let strSessionID = sessionStorage.getItem('SessionID')
-            let MostCurrentDate = '2024-01-01'
+            $.get('https://simplecoop.swollenhippo.com/environment.php',{SessionID:strSessionID, days:1}, function(result)
+            {
+                let data = JSON.parse(result);
+                let date = new Date();
+                let day = date.getDate();
+                let month = date.getMonth() + 1;
+                let year = date.getFullYear();
 
+                // This arrangement can be altered based on how we want the date's format to appear.
+                let strCurrentDate = `${year}-${month}-${day}`;
+                console.log(strCurrentDate)
+                if(data.length < 1){
+                    var requestData = {
+                        SessionID: strSessionID,
+                        temperature: getRandomTemperature(),
+                        observationDateTime: strCurrentDate,
+                        humidity: getRandomHumidity()
+                    };
+                    $.post('https://simplecoop.swollenhippo.com/environment.php', requestData, function(result){
+                        console.log(result)
+                    })
+
+                }
+                else{
+                    console.log(data)
+                }
+            })
+        }
+
+        function displayEnvironment(chartDays, chartName){
+            let strSessionID = sessionStorage.getItem('SessionID')
             let strCurrentDate = new Date();
-            let arrDays = ['04-09-24', '04-02-24']
             let strTemperatures = [];
             let strHumidities = [];
             let strObservationDates = [];
-            $.get('https://simplecoop.swollenhippo.com/environment.php',{SessionID:strSessionID, days:7}, function(result){
-                console.log(result)
+            $.get('https://simplecoop.swollenhippo.com/environment.php',{SessionID:strSessionID, days:chartDays}, function(result){
                 let data = JSON.parse(result);
                 data.forEach(item =>{
-                    console.log(item.ObservationDateTime)
                     strObservationDates.push(item.ObservationDateTime);
                     strTemperatures.push(item.Temperature);
                     strHumidities.push(item.Humidity);
                 });
-                const ctx = document.getElementById('EnvironmentChart').getContext('2d');
+                const ctx = document.getElementById(chartName).getContext('2d');
                 new Chart(ctx, {
                     type: 'line',
                     data: {
@@ -288,6 +343,30 @@
                     }
                 });
             })
+            
+        }
+
+        function openChart(evt, cityName, chartName, days) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+            console.log(chartName, days)
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active"
+            displayEnvironment(days, chartName);
         }
         
 
@@ -373,7 +452,7 @@
                                 $('#divLogin').slideToggle(function () {
                                     $('#divDashboard').slideToggle();
                                     
-                                    displayEnvironment();
+                                    //displayEnvironment();
                                 })
                             } else {
                                 Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});

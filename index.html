@@ -425,6 +425,7 @@
             }
             $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
                 $('#txtInsideTemp').val(result.Value);
+                let str = result.Value;
                 let temp = parseInt(str.substring(0, str.indexOf(' ')));
                 $('#btnIncreaseInsideTemp').attr('aria-label', 'Increase Indoor Temperature to ' + (temp + 1) + ' °F');
                 $('#btnDecreaseInsideTemp').attr('aria-label', 'Decrease Indoor Temperature to ' + (temp - 1) + ' °F');
@@ -439,6 +440,7 @@
             }
             $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
                 $('#txtOutdoorTemp').val(result.Value);
+                let str = result.Value;
                 let temp = parseInt(str.substring(0, str.indexOf(' ')));
                 $('#btnIncreaseOutdoorTemp').attr('aria-label', 'Increase Outdoor Temperature to ' + (temp + 1) + ' °F');
                 $('#btnDecreaseOutdoorTemp').attr('aria-label', 'Decrease Outdoor Temperature to ' + (temp - 1) + ' °F');

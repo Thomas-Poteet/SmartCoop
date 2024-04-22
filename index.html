@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartCoop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></head>
+    <link href="css/index.css" rel="stylesheet">
+</head>
 
 <body class="bg-dark">
     <div class="d-flex flex-wrap col-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1 justify-content-center align-items-center vh-100">
@@ -180,7 +182,83 @@
                     <h1>Settings</h1>
                 </div>
                 <div class="card-body">
-                    <button id="btnBackToDashboard" class="btn btn-danger" type="button">Back To Dashboard</button>
+                    <div class="d-flex col-12 justify-content-evenly">
+                        <div id="cardIndoorTemp"style="width: 50%;">
+                            <div class="d-flex justify-content-center">
+                                <h5>Indoor Temperature</h5>
+                            </div>
+                            <div>
+                                <div id="divIndoorThermostat" class="col-1 thermostat" style="margin: auto;">
+                                    <button id="btnIncreaseInsideTemp" class="btn increase-temp" type="button">+</button>
+                                    <input id="txtInsideTemp" type="text" class="col-12 text-temp" readonly disabled="disabled" value="70 °F">
+                                    <button id="btnDecreaseInsideTemp" class="btn decrease-temp" type="button">-</button>
+                                </div>
+                                <div class="col-6 mt-3" style="margin: auto;">
+                                    <button id="btnIndoorTemp" class="btn btn-primary col-12" type="button">Set Indoor Temp</button>
+                                </div>
+                            </div> 
+                        </div>
+                        <div id="cardOutdoorTemp" style="width: 50%;">
+                            <div class="d-flex justify-content-center">
+                                <h5>Outdoor Temperature</h5>
+                            </div>
+                            <div>
+                                <div id="divOutdoorThermostat" class="col-1 thermostat" style="margin: auto;">
+                                    <button id="btnIncreaseOutdoorTemp" class="btn increase-temp" type="button">+</button>
+                                    <input id="txtOutdoorTemp" type="text" class="col-12 text-temp" readonly disabled="disabled" value="70 °F">
+                                    <button id="btnDecreaseOutdoorTemp" class="btn decrease-temp" type="button">-</button>
+                                </div>
+                                <div class="col-6 mt-3" style="margin: auto;">
+                                    <button id="btnOutdoorTemp" class="btn btn-primary col-12" type="button">Set Outdoor Temp</button>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="d-flex col-12 justify-content-evenly">
+                        <div id="cardFeedTime" class="mt-5" style="width: 50%;">
+                            <div class="d-flex justify-content-center">
+                                <label for="txtFeedTime" class="form-label"><h5>Set Feed Time</h5></label>
+                            </div>
+                            <div>
+                                <div class="col-6" style="margin: auto;">
+                                    <input class="form-control" type="time" id="txtFeedTime" placeholder="Feed Time" required style="border: solid 0px; text-align: center;">
+                                </div>
+                                <div class="col-6 mt-3" style="margin: auto;">
+                                    <button id="btnFeedTime" class="btn btn-primary col-12" type="button">Set Feed Time</button>
+                                </div>
+                            </div> 
+                        </div>
+                        <div id="cardOpenDoor" class="mt-5" style="width: 50%;">
+                            <div class="d-flex justify-content-center">
+                                <label for="txtOpenDoorTime" class="form-label"><h5>Set Open Door Time</h5></label>
+                            </div>
+                            <div>
+                                <div class="col-6" style="margin: auto;">
+                                    <input class="form-control" type="time" id="txtOpenDoorTime" aria-label="Set Open Door Time" required style="border: solid 0px; text-align: center;">
+                                </div>
+                                <div class="col-6 mt-3" style="margin: auto;">
+                                    <button id="btnOpenTime" class="btn btn-primary col-12" type="button">Set Open Door Time</button>
+                                </div>
+                            </div> 
+                        </div>
+                        <div id="cardCloseDoor" class="mt-5" style="width: 50%;">
+                            <div class="d-flex justify-content-center">
+                                <label for="txtCloseDoorTime" class="form-label"><h5>Set Close Door Time</h5></label>
+                            </div>
+                            <div>
+                                <div class="col-6" style="margin: auto;">
+                                    <input class="form-control" type="time" id="txtCloseDoorTime" aria-label="Set Open Door Time" required style="border: solid 0px; text-align: center;">
+                                </div>
+                                <div class="col-6 mt-3" style="margin: auto;">
+                                    <button id="btnCloseTime" class="btn btn-primary col-12" type="button">Set Close Door Time</button>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button id="btnBackToDashboard" class="btn btn-warning col-4 ms-4" type="button">Back To Dashboard</button>
+                        <button id="btnLogout" class="btn btn-danger col-4 ms-4" type="button">Logout</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -289,12 +367,72 @@
             });
             chart.update();
         }
+        
+        // Get and Display Indoor Temp
+        function getIndoorTemp(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'IndoorTemp'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtInsideTemp').val(result.Value);
+            })
+        }
+
+        // Get and Display Outdoor Temp
+        function getOutdoorTemp(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'OutdoorTemp'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtOutdoorTemp').val(result.Value);
+            })
+        }
+
+        // Get and Display Feed Time
+        function getFeedTime(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'FeedTime'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtFeedTime').val(result.Value);
+            })
+        }
+
+        // Get and Display Open Door Time
+        function getOpenDoorTime(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'OpenDoorTime'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtOpenDoorTime').val(result.Value);
+            })
+        }
+
+        // Get and Display Close Door Time
+        function getCloseDoorTime(){
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'CloseDoorTime'
+            }
+            $.getJSON('https://simplecoop.swollenhippo.com/settings.php', data, function(result){
+                $('#txtCloseDoorTime').val(result.Value);
+            })
+        }
 
         $(document).ready(function () {
             if (sessionStorage.getItem('SessionID')) {
                 $('#divDashboard').slideToggle();
                 displayTotalEggs();
                 displayEggChart();
+                getIndoorTemp();
+                getOutdoorTemp();
+                getFeedTime();
+                getOpenDoorTime();
+                getCloseDoorTime();
             } else {
                 $('#divLogin').slideToggle();
             }
@@ -308,7 +446,7 @@
                 data: {SessionID:sessionStorage.getItem('SessionID')},
                 success: function (result) {
                     sessionStorage.removeItem('SessionID');
-                    $('#divDashboard').slideUp(function () {
+                    $('#divSettings').slideUp(function () {
                         $('#divLogin').slideDown();
                     });
                 }
@@ -388,6 +526,11 @@
                                 sessionStorage.setItem('SessionID', result.SessionID);
                                 displayTotalEggs();
                                 displayEggChart();
+                                getIndoorTemp();
+                                getOutdoorTemp();
+                                getFeedTime();
+                                getOpenDoorTime();
+                                getCloseDoorTime();
                                 $('#divLogin').slideToggle(function () {
                                     $('#divDashboard').slideToggle();
                                 })
@@ -530,6 +673,144 @@
             })
         })
 
+        $('#btnIndoorTemp').on('click', function(){
+            let temp = $('#txtInsideTemp').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'IndoorTemp',
+                value: temp
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Indoor Temperature Set'});
+                    }
+                }
+            })
+        });
+
+        $('#btnIncreaseInsideTemp').on('click', function(){
+            let str = $('#txtInsideTemp').val();
+            let temp = parseInt(str.substring(0, str.indexOf(' '))) + 1;
+            $('#txtInsideTemp').val(temp + ' °F');
+        });
+
+        $('#btnDecreaseInsideTemp').on('click', function(){
+            let str = $('#txtInsideTemp').val();
+            let temp = parseInt(str.substring(0, str.indexOf(' '))) - 1;
+            $('#txtInsideTemp').val(temp + ' °F');
+        });
+
+        $('#btnOutdoorTemp').on('click', function(){
+            let temp = $('#txtOutdoorTemp').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'OutdoorTemp',
+                value: temp
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Indoor Temperature Set'});
+                    }
+                }
+            })
+        });
+
+        $('#btnIncreaseOutdoorTemp').on('click', function(){
+            let str = $('#txtOutdoorTemp').val();
+            let temp = parseInt(str.substring(0, str.indexOf(' '))) + 1;
+            $('#txtOutdoorTemp').val(temp + ' °F');
+        });
+
+        $('#btnDecreaseOutdoorTemp').on('click', function(){
+            let str = $('#txtOutdoorTemp').val();
+            let temp = parseInt(str.substring(0, str.indexOf(' '))) - 1;
+            $('#txtOutdoorTemp').val(temp + ' °F');
+        });
+
+        $('#btnFeedTime').on('click', function(){
+            let feedTime = $('#txtFeedTime').val();
+            console.log(feedTime);
+        });
+
+        $('#btnFeedTime').on('click', function(){
+            let feedTime = $('#txtFeedTime').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'FeedTime',
+                value: feedTime
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Feed Time Set'});
+                    }
+                }
+            })
+        });
+
+        $('#btnOpenTime').on('click', function(){
+            let openTime = $('#txtOpenDoorTime').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'OpenDoorTime',
+                value: openTime
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Open Door Time Set'});
+                    }
+                }
+            })
+        });
+
+        $('#btnCloseTime').on('click', function(){
+            let closeTime = $('#txtCloseDoorTime').val();
+            let data = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                setting: 'CloseDoorTime',
+                value: closeTime
+            }
+            $.ajax({
+                url: 'https://simplecoop.swollenhippo.com/settings.php',
+                type: 'PUT',
+                data: data,
+                success: function(result){
+                    if(result.Error){
+                        Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
+                    } else {
+                        console.log(result);
+                    Swal.fire({icon:'success', title:'Success!', text:'Close Door Time Set'});
+                    }
+                }
+            })
+        });
     </script>
 </body>
 

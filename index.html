@@ -723,9 +723,6 @@
                 // Verifying user is in system
                 $.getJSON('https://simplecoop.swollenhippo.com/users.php', { Email: strEmail }, function (user) {
                     console.log(user);
-                    $.getJSON('https://simplecoop.swollenhippo.com/useraddress.php', { Email: strEmail }, function (result) {
-                        console.log(result);
-                    })
                     if (user != null && user.Password === strPassword) {
                         $.post('https://simplecoop.swollenhippo.com/sessions.php', { Email: strEmail, Password: strPassword }, function (result) {
                             result = JSON.parse(result);
@@ -751,7 +748,7 @@
                         })
                     }
                     else {
-                        Swal.fire({ icon: 'error', title: 'Uh Oh!', text: user.Error })
+                        Swal.fire({ icon: 'error', title: 'Uh Oh!', text: 'Invalid Login credentials' })
                     }
                 })
             }
@@ -945,7 +942,7 @@
                         Swal.fire({icon:'error', title:'Uh Oh!', text:result.Error});
                     } else {
                         console.log(result);
-                    Swal.fire({icon:'success', title:'Success!', text:'Indoor Temperature Set'});
+                    Swal.fire({icon:'success', title:'Success!', text:'Outdoor Temperature Set'});
                     }
                 }
             })
